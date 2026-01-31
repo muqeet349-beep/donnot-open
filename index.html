@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine 💖</title>
+
+<style>
+  body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+  }
+
+  .box {
+    text-align: center;
+    background: white;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    z-index: 2;
+  }
+
+  /* ❤️ Animated Name */
+  .name {
+    font-size: 40px;
+    color: #ff2e63;
+    font-weight: bold;
+    animation: heartbeat 1.5s infinite, glow 2s infinite;
+  }
+
+  @keyframes heartbeat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes glow {
+    0% { text-shadow: 0 0 5px #ff4d6d; }
+    50% { text-shadow: 0 0 20px #ff4d6d; }
+    100% { text-shadow: 0 0 5px #ff4d6d; }
+  }
+
+  h2 { color: #444; }
+
+  button {
+    padding: 12px 28px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 15px;
+  }
+
+  #yes {
+    background: #ff2e63;
+    color: white;
+  }
+
+  #no {
+    background: #ddd;
+    position: absolute;
+  }
+
+  #gif {
+    display: none;
+    margin-top: 20px;
+  }
+
+  /* 💕 Floating Hearts */
+  .heart {
+    position: absolute;
+    color: #ff2e63;
+    font-size: 20px;
+    animation: floatUp 4s linear infinite;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-800px);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 Music (starts on YES click) -->
+<audio id="music" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+
+<div class="box">
+  <div class="name">Neha ❤️</div>
+  <h2>Will you be my Valentine?</h2>
+
+  <button id="yes">Yes 😍</button>
+  <button id="no">No 🙈</button>
+
+  <div id="gif">
+    <h2>I knew it 😘💃🕺</h2>
+    <img src="https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif" width="250">
+  </div>
+</div>
+
+<script>
+  const noBtn = document.getElementById("no");
+  const yesBtn = document.getElementById("yes");
+  const gif = document.getElementById("gif");
+  const music = document.getElementById("music");
+
+  // NO button runs away 😈
+  noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  });
+
+  // YES click magic 💖
+  yesBtn.addEventListener("click", () => {
+    music.play();
+    gif.style.display = "block";
+    yesBtn.style.display = "none";
+    noBtn.style.display = "none";
+    createHearts();
+  });
+
+  // 💕 Hearts animation
+  function createHearts() {
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.bottom = "0px";
+      heart.style.fontSize = (20 + Math.random() * 20) + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 4000);
+    }, 300);
+  }
+</script>
+
+</body>
+</html>
